@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ejemplo django</title>
+</head>
+<body>
+	<h1>ejemplo borrar datos</h1>
+		<center>
+		<table width="80%" bgcolor="gray">
+		  	<caption>Articulos</caption>
+		  	<tr bgcolor="ligthgreen">
+				<th>Titulo</th>
+				<th>Contenido</th>
+				<th>Fecha</th>
+				<th style="min-width:80px;">Accion</th>
+			</tr>
+			{% if title_list %}
+			    {% for articulo in title_list %}
+			    <tr bgcolor="white">
+			      <td>{{ articulo.titulo }}</td>
+			      <td>{{ articulo.contenido }}</td>
+			      <td>{{ articulo.fecha }}</td>
+			      <td>
+			      	<form action="{% url 'borrar' %}" method="post">
+			      		{% csrf_token %}
+						<input name="id" type="text" value="{{ articulo.id }}" style="width:20px;display:none;" readonly="" />
+			      		<center><input type="submit" value="borrar" /></center>
+			      </td>
+			      </form>
+			    </tr>
+			    {% endfor %}
+			{% else %}
+			    <p>Articulos no diponibles.</p>
+			{% endif %}
+		</table>
+		</center>
+		<br>
+</body>
+</html>

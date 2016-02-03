@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ejemplo django</title>
+</head>
+<body>
+	<h1>ejemplo actualizar datos</h1>
+		<center>
+		<table width="80%" bgcolor="gray">
+		  	<caption>Articulos</caption>
+		  	<tr bgcolor="ligthgreen">
+				<th>Titulo</th>
+				<th>Contenido</th>
+				<th>Fecha</th>
+				<th style="min-width:80px;">Accion</th>
+			</tr>
+			{% if title_list %}
+			    {% for articulo in title_list %}
+			    <tr bgcolor="white">
+		      		<form action="{% url 'actualizar' %}" method="post">
+			    	  <td><input type="text" name="titulo" value="{{ articulo.titulo }}" /></td>
+			    	  <td><input type="text" name="contenido" value="{{ articulo.contenido }}" /></td>
+			    	  <td><input type="text" name="fecha" value="{{ articulo.fecha | date:'Y-m-d H:i:s' }}" /></td>
+			    	  <!--date:'Y-m-d H:i:S'  =  2016-01-29 22:31:12 -->
+			    	  <!--date:'c' =  2016-01-29T22:31:32.367522-04:00 -->
+			    	  <td>
+			      		{% csrf_token %}
+						<input name="id" type="text" value="{{ articulo.id }}" style="width:20px;display:none;" readonly="" />
+			      		<center><input type="submit" value="guardar" /></center>
+			    	  </td>
+			   		</form>
+			    </tr>
+			    {% endfor %}
+			{% else %}
+			    <p>Articulos no diponibles.</p>
+			{% endif %}
+		</table>
+		</center>
+		<br>
+</body>
+</html>

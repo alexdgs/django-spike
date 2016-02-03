@@ -1,0 +1,13 @@
+<h1>Borrar articulo</h1>
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'borrar2' %}" method="post">
+	{% csrf_token %}
+	{% for articulo in title_list  %}
+		<input type="radio" name="articulo" id="articulo {{ forloop.counter }}" value="{{ articulo.id }}">
+		<label for="articulo {{ forloop.counter }}">{{ articulo.titulo }}</label><br/>
+	{% endfor %}
+	<input type="submit" value="Borrar"/>
+</form>
